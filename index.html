@@ -1,4 +1,35 @@
 <ul id="contacts"></ul>
+
+
 <script>
+
+    var contactsList = document.getElementById('contacts');
+
+    sync();
+
+    function getContacts() {
+        return fetch(
+            'http://localhost:3000/contacts'
+        ).then(
+            function (response) {
+                return response.json()
+            }
+        )
+    }
+
+    function displayContacts(contacts) {
+        contactsList.innerHTML = '';
+        contacts.forEach(function (contact) {
+            var contactItem = document.createElement('li');
+
+            contactItem.innerHTML = contact.firstName + ' ' + contact.lastName + ' phone: ' + contact.phoneNumber +
+                ' ' + ' email: ' + contact.email;
+            contactsList.prepend(contactItem);
+        })
+    }
+
+    function sync() {
+        getContacts().then(displayContacts);
+    }
 
 </script>
