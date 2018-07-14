@@ -1,10 +1,26 @@
-<input id="contact-first-name" type="text">
-<input id="contact-last-name" type="text">
-<input id="contact-number" type="text">
-<input id="contact-mail" type="text">
+<input id="contact-first-name" placeholder="first name" type="text">
+<input id="contact-last-name"placeholder="last name" type="text">
+<input id="contact-number" placeholder="phone number" type="number">
+<input id="contact-mail" placeholder="email address" type="email">
 <button id="add-contact">Add</button>
 <ul id="contacts"></ul>
 
+<style>
+
+    li {
+        width: 760px;
+        height: 40px;
+    }
+
+    li>button {
+        float: right;
+    }
+
+    div input {
+        width: 150px;
+    }
+
+</style>
 
 <script>
     var contactsList = document.getElementById('contacts');
@@ -89,9 +105,14 @@
             var deleteButton = document.createElement('button');
             deleteButton.innerHTML = 'x';
 
-            contactItem.innerHTML = contact.firstName + ' ' + contact.lastName + ' phone: ' + contact.phoneNumber +
-                ' ' + ' email: ' + contact.email;
-            contactsList.prepend(contactItem);
+            contactItem.innerHTML = contact.firstName + ' ' + contact.lastName + ' numer: ' + contact.phoneNumber +
+                ' ' + ' adres: ' + contact.email;
+            contactsList.appendChild(contactItem);
+
+            contactItem.appendChild(deleteButton);
+            deleteButton.addEventListener('click', function () {
+                deleteContact(contact.id)
+            });
 
             contactItem.appendChild(editButton);
             editButton.addEventListener('click', function () {
@@ -106,6 +127,14 @@
                 inputNumber.value = contact.phoneNumber;
                 inputMail.value = contact.email;
                 saveButton.innerHTML = 'confirm';
+                inputFName.setAttribute('type', 'text');
+                inputLName.setAttribute('type', 'text');
+                inputNumber.setAttribute('type', 'number');
+                inputMail.setAttribute('type', 'email');
+                inputFName.setAttribute('placeholder', 'first name');
+                inputLName.setAttribute('placeholder', 'last name');
+                inputNumber.setAttribute('placeholder', 'phone number');
+                inputMail.setAttribute('placeholder', 'email address');
                 editForm.appendChild(inputFName);
                 editForm.appendChild(inputLName);
                 editForm.appendChild(inputNumber);
@@ -116,20 +145,18 @@
                     editContact(contact.id, inputFName.value, inputLName.value, inputNumber.value, inputMail.value)
                 })
             });
-
-            contactItem.appendChild(deleteButton);
-            deleteButton.addEventListener('click', function () {
-                deleteContact(contact.id)
-            });
         });
     }
 
     function sync() {
-        getContacts().then(function (contacts) { return contacts.sort(function(a, b){
-            if(a.lastName < b.lastName) return 1;
-            if(a.lastName > b.lastName) return -1;
+        getContacts().then(function (contacts) {
+            return contacts.sort(function(a, b) {
+            if(a.lastName < b.lastName) return -1;
+            if(a.lastName > b.lastName) return 1;
             return 0;
-        }); }).then(displayContacts);
+            });
+        }
+        ).then(displayContacts);
     }
 
 </script>
