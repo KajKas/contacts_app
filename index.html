@@ -96,7 +96,26 @@
 
             contactItem.appendChild(editButton);
             editButton.addEventListener('click', function () {
-                editContact(contact.id)
+                var editForm = document.createElement('div');
+                var inputFName = document.createElement('input');
+                var inputLName = document.createElement('input');
+                var inputNumber = document.createElement('input');
+                var inputMail = document.createElement('input');
+                var saveButton = document.createElement('button');
+                inputFName.value = contact.firstName;
+                inputLName.value = contact.lastName;
+                inputNumber.value = contact.phoneNumber;
+                inputMail.value = contact.email;
+                saveButton.innerHTML = 'confirm';
+                editForm.appendChild(inputFName);
+                editForm.appendChild(inputLName);
+                editForm.appendChild(inputNumber);
+                editForm.appendChild(inputMail);
+                editForm.appendChild(saveButton);
+                contactItem.appendChild(editForm);
+                saveButton.addEventListener('click', function () {
+                    editContact(contact.id, inputFName.value, inputLName.value, inputNumber.value, inputMail.value)
+                })
             });
 
             contactItem.appendChild(deleteButton);
