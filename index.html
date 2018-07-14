@@ -36,7 +36,6 @@
             phoneNumber: contactNumber.value,
             email: contactMail.value
         };
-
         fetch(
             'http://localhost:3000/contacts', {
                 method: 'POST',
@@ -44,19 +43,49 @@
                 headers:{
                     'Content-Type': 'application/json'
                 }
-            }).then(function () { sync() })
+            }).then(function () {
+                sync()
+            })
+    }
+
+    function deleteContact(contactId) {
+        fetch(
+            'http://localhost:3000/contacts/' + contactId, {
+                method: 'DELETE',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(sync)
     }
 
     function displayContacts(contacts) {
         contactsList.innerHTML = '';
         contacts.forEach(function (contact) {
             var contactItem = document.createElement('li');
+            var deleteButton = document.createElement('button');
+            deleteButton.innerHTML = 'x';
 
             contactItem.innerHTML = contact.firstName + ' ' + contact.lastName + ' phone: ' + contact.phoneNumber +
                 ' ' + ' email: ' + contact.email;
             contactsList.prepend(contactItem);
-        })
+
+            contactItem.appendChild(deleteButton);
+            deleteButton.addEventListener('click', function () {
+                deleteContact(contact.id)
+            });
+        });
+
     }
+
+
+
+
+        // contacts.sort(function(a, b){
+        //     if(a.lastName < b.lastName) return -1;
+        //     if(a.lastName > b.lastName) return 1;
+        //     return 0;
+        // });
 
     function sync() {
         getContacts().then(displayContacts);
