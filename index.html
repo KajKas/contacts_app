@@ -63,8 +63,22 @@
         ).then(sync)
     }
 
-    function editContact() {
-
+    function editContact(contactId, contactFirstName, contactLastName, contactNumber, contactEmail) {
+        var edContact = {
+            firstName: contactFirstName,
+            lastName: contactLastName,
+            phoneNumber: contactNumber,
+            email: contactEmail
+        };
+        fetch(
+            'http://localhost:3000/contacts/' + contactId, {
+                method: 'PATCH',
+                body: JSON.stringify(edContact),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(sync)
     }
 
     function displayContacts(contacts) {
