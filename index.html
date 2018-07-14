@@ -1,11 +1,23 @@
+<input id="contact-first-name" type="text">
+<input id="contact-last-name" type="text">
+<input id="contact-number" type="text">
+<input id="contact-mail" type="text">
+<button id="add-contact">Add</button>
 <ul id="contacts"></ul>
 
 
 <script>
 
     var contactsList = document.getElementById('contacts');
+    var contactFirstName = document.getElementById('contact-first-name');
+    var contactLastName = document.getElementById('contact-last-name');
+    var contactNumber = document.getElementById('contact-number');
+    var contactMail = document.getElementById('contact-mail');
+    var addButton = document.getElementById('add-contact');
 
     sync();
+
+    addButton.addEventListener('click', addContact);
 
     function getContacts() {
         return fetch(
@@ -15,6 +27,24 @@
                 return response.json()
             }
         )
+    }
+
+    function addContact() {
+        var contact = {
+            firstName: contactFirstName.value,
+            lastName: contactLastName.value,
+            phoneNumber: contactNumber.value,
+            email: contactMail.value
+        };
+
+        fetch(
+            'http://localhost:3000/contacts', {
+                method: 'POST',
+                body: JSON.stringify(contact),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }).then(function () { sync() })
     }
 
     function displayContacts(contacts) {

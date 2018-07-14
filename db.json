@@ -6,6 +6,13 @@
       "lastName": "Kreft",
       "phoneNumber": "500-600-700",
       "email": "seba@mail.com"
+    },
+    {
+      "firstName": "kaj",
+      "lastName": "kas",
+      "phoneNumber": "666",
+      "email": "dupa@dupa",
+      "id": 2
     }
   ]
 }
