@@ -1,3 +1,32 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "firstName": "kaj",
+      "lastName": "kas",
+      "phoneNumber": "666",
+      "email": "dupa@",
+      "id": 1
+    },
+    {
+      "firstName": "kaj",
+      "lastName": "kas",
+      "phoneNumber": "666",
+      "email": "dupa@",
+      "id": 2
+    },
+    {
+      "firstName": "kaj",
+      "lastName": "kas",
+      "phoneNumber": "666",
+      "email": "dupa@",
+      "id": 8
+    },
+    {
+      "firstName": "kaj",
+      "lastName": "kas",
+      "phoneNumber": "666",
+      "email": "dupa@",
+      "id": 9
+    }
+  ]
 }

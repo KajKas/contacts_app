@@ -36,6 +36,10 @@
             phoneNumber: contactNumber.value,
             email: contactMail.value
         };
+        contactFirstName.value = '';
+        contactLastName.value = '';
+        contactNumber.value = '';
+        contactMail.value = '';
         fetch(
             'http://localhost:3000/contacts', {
                 method: 'POST',
