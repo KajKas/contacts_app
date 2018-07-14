@@ -63,16 +63,27 @@
         ).then(sync)
     }
 
+    function editContact() {
+
+    }
+
     function displayContacts(contacts) {
         contactsList.innerHTML = '';
         contacts.forEach(function (contact) {
             var contactItem = document.createElement('li');
+            var editButton = document.createElement('button');
+            editButton.innerHTML = 'edit';
             var deleteButton = document.createElement('button');
             deleteButton.innerHTML = 'x';
 
             contactItem.innerHTML = contact.firstName + ' ' + contact.lastName + ' phone: ' + contact.phoneNumber +
                 ' ' + ' email: ' + contact.email;
             contactsList.prepend(contactItem);
+
+            contactItem.appendChild(editButton);
+            editButton.addEventListener('click', function () {
+                editContact(contact.id)
+            });
 
             contactItem.appendChild(deleteButton);
             deleteButton.addEventListener('click', function () {
